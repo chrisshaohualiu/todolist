@@ -1,0 +1,26 @@
+<div class="container">
+  <h1 class="heading">TODO List</h1>
+  <h3 class="description">A place to store your todos</h3>
+  <ol>
+    <h3>Filter your to-dos</h3>
+    <li class="list-item" *ngFor="let item of toDoList">
+      <div class="list-item-content">
+        <div>
+          <span class="completed" *ngIf="!item.completed">Completed</span>
+          <span [ngClass]="{ striked: item.completed }">{{ item.task }}</span>
+        </div>
+        <button>x</button>
+      </div>
+    </li>
+  </ol>
+  <form class="add-form">
+    <input
+      class="add-input"
+      type="text"
+      name="new-task"
+      id="new-task"
+      placeholder="Add your to-do"
+    />
+    <button class="add-btn">Add</button>
+  </form>
+</div>

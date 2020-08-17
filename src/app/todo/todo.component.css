@@ -1,0 +1,43 @@
+.container {
+  background: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+  border: 1px black solid;
+  width: 1000px;
+}
+
+.list-item-content {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: decimal;
+  margin: 20px;
+}
+
+.completed {
+  color: #ff69b4;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #ff69b4;
+}
+
+.striked {
+  text-decoration: line-through;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-input {
+  padding: 10px;
+  border: #bbb;
+}
+
+.add-btn {
+  padding: 10px;
+  background: #ff1493;
+  color: white;
+  border: none;
+}
