@@ -1,26 +1,62 @@
-<div class="container">
-  <h1 class="heading">TODO List</h1>
-  <h3 class="description">A place to store your todos</h3>
-  <ol>
-    <h3>Filter your to-dos</h3>
-    <li class="list-item" *ngFor="let item of toDoList">
-      <div class="list-item-content">
-        <div>
-          <span class="completed" *ngIf="!item.completed">Completed</span>
-          <span [ngClass]="{ striked: item.completed }">{{ item.task }}</span>
+<main class="main">
+  <div class="container">
+    <h1 class="heading">TODO List</h1>
+    <h3 class="description">A place to store your todos</h3>
+    <form
+      class="search"
+      #searchForm="ngForm"
+      (input)="setSearchTerm(searchForm)"
+    >
+      <input
+        class="search-bar"
+        type="text"
+        name="searchTerm"
+        id="searchTerm"
+        placeholder="Filter your to-dos"
+        ngModel
+      />
+    </form>
+    <p *ngIf="toDoList.length === 0">Nothing to do!</p>
+    <ol class="list">
+      <li class="list-item" *ngFor="let item of filter(); index as i">
+        <div class="list-item-content">
+          <div class="task">
+            <button
+              (click)="completeTask(i)"
+              class="completed"
+              *ngIf="!item.completed"
+            >
+              Completed
+            </button>
+            <p
+              *ngIf="showIndex !== i"
+              [ngClass]="{ striked: item.completed }"
+              (click)="setShowIndex(i)"
+            >
+              {{ item.task }}
+            </p>
+            <form
+              #editForm="ngForm"
+              *ngIf="showIndex === i"
+              (ngSubmit)="resetShowIndex()"
+            >
+              <input type="text" name="update" [(ngModel)]="item.task" />
+            </form>
+          </div>
+          <button class="remove-btn" (click)="removeTask(i)">x</button>
         </div>
-        <button>x</button>
-      </div>
-    </li>
-  </ol>
-  <form class="add-form">
-    <input
-      class="add-input"
-      type="text"
-      name="new-task"
-      id="new-task"
-      placeholder="Add your to-do"
-    />
-    <button class="add-btn">Add</button>
-  </form>
-</div>
+      </li>
+    </ol>
+    <form #addForm="ngForm" class="add-form" (ngSubmit)="addTask(addForm)">
+      <input
+        ngModel
+        class="add-input"
+        type="text"
+        name="task"
+        id="task"
+        placeholder="Add your to-do"
+      />
+      <button class="add-btn">Add</button>
+    </form>
+  </div>
+</main>
